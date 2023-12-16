@@ -1,0 +1,11 @@
+name: Weed
+version: 0.1
+author: Ethann8
+description: A plugin that allows you to smoke weed.
+api-version: 1.13
+main: ch.shkermit.weed.Main
+commands:
+  marijuana:
+    description: get marijuana item.
+    usage: /marijuana <player>
+    permission: marijuana.get
