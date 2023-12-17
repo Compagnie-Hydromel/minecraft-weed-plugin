@@ -41,7 +41,8 @@ public class ItemUtils {
         eater.setSaturation(eater.getSaturation() + saturationLevelToAdd);
     }
 
-    public static boolean isSimilar(ItemStack itemStack, String name) {
+    public static boolean containSpecifiedIdTag(ItemStack itemStack, String name) {
+        if (itemStack == null || itemStack.getItemMeta() == null) return false;
         return itemStack.getItemMeta().getPersistentDataContainer().has(getNamespacedKey(name), PersistentDataType.STRING) && itemStack.getItemMeta().getPersistentDataContainer().get(getNamespacedKey(name), PersistentDataType.STRING).equals("weed_type: " + name);
     }
 

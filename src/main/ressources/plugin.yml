@@ -21,3 +21,7 @@ commands:
     description: get jointcul item.
     usage: /jointcul <player>
     permission: weed.jointcul
+  bong:
+    description: get bong item.
+    usage: /bong <player>
+    permission: weed.bong

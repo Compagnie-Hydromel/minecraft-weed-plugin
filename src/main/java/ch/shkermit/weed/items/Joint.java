@@ -69,16 +69,15 @@ public class Joint implements Listener, CommandExecutor, CraftableItem {
 
     @Override
     public ShapedRecipe getCraftingRecipe(NamespacedKey namespacedKey) {
-        ShapedRecipe recipe = new ShapedRecipe(namespacedKey, getItemStack());
-        recipe.shape("MP");
-        recipe.setIngredient('P', Material.PAPER);
-        recipe.setIngredient('M', new RecipeChoice.ExactChoice(marijuana.getItemStack()));
-        return recipe;
+        return new ShapedRecipe(namespacedKey, getItemStack())
+            .shape("MP")
+            .setIngredient('P', Material.PAPER)
+            .setIngredient('M', new RecipeChoice.ExactChoice(marijuana.getItemStack()));
     }
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.isSimilar(itemStack, getName());
+        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ch.shkermit.weed.items;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,14 +10,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
-public class JointCul implements Listener, CommandExecutor, Item {
+public class Bong implements Listener, CommandExecutor, CraftableItem {
+    private Marijuana marijuana = new Marijuana();
     private final String name = this.getClass().getSimpleName().toLowerCase();;
-    private final String displayName = "§rCul du joint";
+    private final String displayName = "§rBong";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -30,15 +33,19 @@ public class JointCul implements Listener, CommandExecutor, Item {
         if(item == null) return;
         
         if(isSimilar(item) && playerInteractEvent.getAction().name().contains("RIGHT")) {
-            item.setAmount(item.getAmount() - 1);
+            playerInteractEvent.setCancelled(true);
+            if(marijuana.isSimilar(player.getInventory().getItemInOffHand())) {
+                ItemStack itemInInventory = player.getInventory().getItemInOffHand();
+                itemInInventory.setAmount(itemInInventory.getAmount() - 1);
+                player.addPotionEffects(ItemUtils.getEffects(
+                    PotionEffectType.SLOW_FALLING.createEffect(20 * 45, 255),
+                    PotionEffectType.LEVITATION.createEffect(20 * 45, 255)
+                ));
 
-            int effectTime = 20 * 15;
-
-            player.addPotionEffects(ItemUtils.getEffects(
-                PotionEffectType.SLOW_FALLING.createEffect(effectTime, 1),
-                PotionEffectType.DARKNESS.createEffect(effectTime, 1)));
-
-            if(player.getHealth() < 20) player.setHealth(player.getHealth() + 1);
+                ItemUtils.smoke(player.getWorld(), player.getLocation());
+            }else {
+                player.sendMessage("§r§cPut marijuana in your second hand to smoke it");
+            }
         }
     }
 
@@ -65,11 +72,20 @@ public class JointCul implements Listener, CommandExecutor, Item {
     @Override
     public ItemStack getItemStack(int amount) {
         return ItemUtils.createItem(
-                Material.STICK,
-                amount,
-                displayName,
-                name,
-                "§r§7You exaclty know what you gonna smoke bro",
-                "§r§7You fucking druggo");
+            Material.GLASS_BOTTLE, 
+            amount, 
+            displayName,
+            name,
+            "§r§7A bong to smoke weed with",
+            "§r§7Brooooo");
+    }
+
+    @Override
+    public ShapedRecipe getCraftingRecipe(NamespacedKey namespacedKey) {
+        return new ShapedRecipe(namespacedKey, getItemStack())
+            .shape("Gaa", "aGG", "aGA")
+            .setIngredient('G', Material.GLASS)
+            .setIngredient('A', Material.AMETHYST_SHARD)
+            .setIngredient('a', Material.AIR);
     }
 }

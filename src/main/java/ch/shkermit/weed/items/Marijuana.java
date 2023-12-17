@@ -59,19 +59,15 @@ public class Marijuana implements Listener, CommandExecutor, CraftableItem {
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.isSimilar(itemStack, getName());
+        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
     }
 
     @Override
     public ShapedRecipe getCraftingRecipe(NamespacedKey namespacedKey) {
-        ShapedRecipe recipe = new ShapedRecipe(namespacedKey, getItemStack(2));
-        recipe.shape(
-                "BBB",
-                "BMB",
-                "BBB");
-        recipe.setIngredient('M', new RecipeChoice.MaterialChoice.ExactChoice(getItemStack()));
-        recipe.setIngredient('B', Material.BONE_MEAL);
-        return recipe;
+        return new ShapedRecipe(namespacedKey, getItemStack(2))
+            .shape("BBB", "BMB", "BBB")
+            .setIngredient('M', new RecipeChoice.ExactChoice(getItemStack()))
+            .setIngredient('B', Material.BONE_MEAL);
     }
 
     @Override

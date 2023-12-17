@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ch.shkermit.weed.items.Bong;
 import ch.shkermit.weed.items.CraftableItem;
 import ch.shkermit.weed.items.Item;
 import ch.shkermit.weed.items.JointCul;
@@ -19,7 +20,7 @@ import ch.shkermit.weed.items.Joint;
 public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie(), new Joint(), new JointCul());
+		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie(), new Joint(), new JointCul(), new Bong());
 		
 		for(Item item : items) {
 			if(item instanceof Listener) getServer().getPluginManager().registerEvents((Listener) item, this);

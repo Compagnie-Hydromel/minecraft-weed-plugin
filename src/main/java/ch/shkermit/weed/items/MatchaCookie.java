@@ -58,18 +58,16 @@ public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.isSimilar(itemStack, getName());
+        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
     }
 
     @Override
     public ShapedRecipe getCraftingRecipe(NamespacedKey namespacedKey) {
-        ShapedRecipe recipe = new ShapedRecipe(namespacedKey, getItemStack(3));
-
-        recipe.shape("MMM", "WCW");
-        recipe.setIngredient('W', Material.WHEAT);
-        recipe.setIngredient('C', Material.COCOA_BEANS);
-        recipe.setIngredient('M', new RecipeChoice.ExactChoice(marijuana.getItemStack()));
-        return recipe;
+        return new ShapedRecipe(namespacedKey, getItemStack(3))
+            .shape("MMM", "WCW")
+            .setIngredient('W', Material.WHEAT)
+            .setIngredient('C', Material.COCOA_BEANS)
+            .setIngredient('M', new RecipeChoice.ExactChoice(marijuana.getItemStack()));
     }
 
     @Override
