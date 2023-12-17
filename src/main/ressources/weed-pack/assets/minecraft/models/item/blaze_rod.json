@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/blaze_rod"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 11
+      },
+      "model": "minecraft:item/joint"
+    }
+  ]
+}
+
