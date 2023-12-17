@@ -83,8 +83,7 @@ public class MatchaCookie implements Listener, CommandExecutor, Item {
                 Material.COOKIE,
                 amount,
                 displayName,
-                "§r§7A plant that can be smoked",
-                "§r§7to get high.");
+                "§r§7A cookie with matcha 😉😉");
     }
 
 }
