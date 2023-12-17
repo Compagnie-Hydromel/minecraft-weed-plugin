@@ -43,6 +43,8 @@ public class Bong implements Listener, CommandExecutor, CraftableItem {
                 ));
 
                 ItemUtils.smoke(player.getWorld(), player.getLocation());
+
+                player.getWorld().playSound(player.getLocation(), "minecraft:entity.player.burp", 100, 1.0f);
             }else {
                 player.sendMessage("§r§cPut marijuana in your second hand to smoke it");
             }
