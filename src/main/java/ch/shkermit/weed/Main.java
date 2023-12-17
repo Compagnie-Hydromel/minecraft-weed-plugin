@@ -16,10 +16,7 @@ import ch.shkermit.weed.items.MatchaCookie;
 public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		// news items
-		Marijuana marijuana = new Marijuana();
-		MatchaCookie matchaCookie = new MatchaCookie();
-		List<? extends Item> items = Arrays.asList(marijuana, matchaCookie);
+		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie());
 		
 		for(Item item : items) {
 			getServer().getPluginManager().registerEvents((Listener) item, this);

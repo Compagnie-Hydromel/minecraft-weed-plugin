@@ -18,6 +18,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
 public class MatchaCookie implements Listener, CommandExecutor, Item {
@@ -27,7 +28,7 @@ public class MatchaCookie implements Listener, CommandExecutor, Item {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        return false;
+        return CommandUtils.getItemCommands(sender, args, getItemStack());
     }
 
     @EventHandler

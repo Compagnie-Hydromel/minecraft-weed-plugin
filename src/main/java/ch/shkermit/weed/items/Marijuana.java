@@ -1,6 +1,5 @@
 package ch.shkermit.weed.items;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -16,29 +15,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 
+import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
 public class Marijuana implements Listener, CommandExecutor, Item {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player) {
-            Player player = (Player) sender;
-            Player target = player;
-
-            if (args.length > 0) {
-                target = Bukkit.getPlayer(args[0]);
-
-                if (target == null) {
-                    player.sendMessage("§r§cPlayer not found.");
-                    return true;
-                }
-            }
-            
-            target.getInventory().addItem(getItemStack());
-            return true;
-        }
-        return false;
+        return CommandUtils.getItemCommands(sender, args, getItemStack());
     }
 
     @EventHandler
