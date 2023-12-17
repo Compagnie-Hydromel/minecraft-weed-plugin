@@ -17,3 +17,7 @@ commands:
     description: get joint item.
     usage: /joint <player>
     permission: weed.joint
+  jointcul:
+    description: get jointcul item.
+    usage: /jointcul <player>
+    permission: weed.jointcul

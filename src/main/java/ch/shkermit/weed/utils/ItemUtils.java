@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
 
 import ch.shkermit.weed.Main;
 
@@ -50,6 +51,10 @@ public class ItemUtils {
             world.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, location, 0);
             location.setY(location.getY() + 0.2);
         }
+    }
+
+    public static List<PotionEffect> getEffects(PotionEffect... potionEffects) {
+        return Arrays.asList(potionEffects);
     }
 
     private static NamespacedKey getNamespacedKey(String name) {

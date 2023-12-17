@@ -16,15 +16,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import ch.shkermit.weed.Main;
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
-public class Joint implements Listener, CommandExecutor, Item {
+public class Joint implements Listener, CommandExecutor, CraftableItem {
     private Marijuana marijuana = new Marijuana();
+    private JointCul joinCul = new JointCul();
     private final String name = this.getClass().getSimpleName().toLowerCase();;
     private final String displayName = "§rJoint";
     private List<Player> playersHigh = new ArrayList<Player>();
@@ -36,18 +36,15 @@ public class Joint implements Listener, CommandExecutor, Item {
         if(item == null) return;
         
         if(isSimilar(item) && playerInteractEvent.getAction().name().contains("RIGHT") && !playersHigh.contains(player)) {
-            List<PotionEffect> effect = new ArrayList<PotionEffect>();
-
             playerInteractEvent.setCancelled(true);
 
-            effect.add(PotionEffectType.LEVITATION.createEffect(20 * 30, 255));
-            effect.add(PotionEffectType.SLOW_FALLING.createEffect(20 * 30, 255));
-
-            player.addPotionEffects(effect);
+            player.addPotionEffects(ItemUtils.getEffects(
+                    PotionEffectType.LEVITATION.createEffect(20 * 30, 255),
+                    PotionEffectType.SLOW_FALLING.createEffect(20 * 30, 255)));
             
             ItemUtils.smoke(player.getWorld(), player.getLocation());
 
-            playerInteractEvent.getItem().setAmount(playerInteractEvent.getItem().getAmount() - 1);
+            item.setAmount(item.getAmount() - 1);
 
             playersHigh.add(player);
 
@@ -110,14 +107,13 @@ public class Joint implements Listener, CommandExecutor, Item {
 
         @Override
         public void run() {
-            List<PotionEffect> effect = new ArrayList<PotionEffect>();
-            
-            effect.add(PotionEffectType.SLOW_FALLING.createEffect(20 * 15, 255));
-            effect.add(PotionEffectType.CONFUSION.createEffect(20 * 15, 255));
-
-            player.addPotionEffects(effect);
+            player.addPotionEffects(ItemUtils.getEffects(
+                PotionEffectType.SLOW_FALLING.createEffect(20 * 15, 255),
+                PotionEffectType.CONFUSION.createEffect(20 * 15, 255)));
 
             ItemUtils.smoke(player.getWorld(), player.getLocation());
+
+            player.getInventory().addItem(joinCul.getItemStack());
 
             playersHigh.remove(player);
         }

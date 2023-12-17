@@ -18,7 +18,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
-public class Marijuana implements Listener, CommandExecutor, Item {
+public class Marijuana implements Listener, CommandExecutor, CraftableItem {
     private final String name = this.getClass().getSimpleName().toLowerCase();
     private final String displayName = "§rMarijuana";
 

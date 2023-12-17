@@ -1,8 +1,5 @@
 package ch.shkermit.weed.items;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
@@ -15,13 +12,12 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
-public class MatchaCookie implements Listener, CommandExecutor, Item {
+public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
     private Marijuana marijuana = new Marijuana();
     private final String name = this.getClass().getSimpleName().toLowerCase();
     private final String displayName = "§r§aMatcha Cookie";
@@ -37,18 +33,16 @@ public class MatchaCookie implements Listener, CommandExecutor, Item {
         Player player = playerItemConsumeEvent.getPlayer();
 
         if (isSimilar(item)) {
-            List<PotionEffect> effect = new ArrayList<PotionEffect>();
-            int effectTime = 20 * 60 * 5;
-
             playerItemConsumeEvent.setCancelled(true);
             ItemUtils.eatItem(player, playerItemConsumeEvent.getHand(), item, 6, 1f);
+            
+            int effectTime = 20 * 60 * 5;
 
-            effect.add(PotionEffectType.CONFUSION.createEffect(20 * 15, 5));
-            effect.add(PotionEffectType.WEAKNESS.createEffect(20 * 15, 5));
-            effect.add(PotionEffectType.LEVITATION.createEffect(effectTime, 255));
-            effect.add(PotionEffectType.SLOW_FALLING.createEffect(effectTime, 255));
-
-            player.addPotionEffects(effect);
+            player.addPotionEffects(ItemUtils.getEffects(
+                PotionEffectType.CONFUSION.createEffect(20 * 15, 5),
+                PotionEffectType.LEVITATION.createEffect(effectTime, 255),
+                PotionEffectType.SLOW_FALLING.createEffect(effectTime, 255),
+                PotionEffectType.WEAKNESS.createEffect(20 * 15, 5)));
         }
     }
 
