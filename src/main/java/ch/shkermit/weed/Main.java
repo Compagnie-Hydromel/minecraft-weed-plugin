@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ch.shkermit.weed.event.texturePackAutoAdd;
 import ch.shkermit.weed.items.Bong;
 import ch.shkermit.weed.items.CraftableItem;
 import ch.shkermit.weed.items.Item;
@@ -27,6 +28,8 @@ public class Main extends JavaPlugin {
 			if(item instanceof CommandExecutor) getCommand(item.getName()).setExecutor((CommandExecutor) item);
 			if(item instanceof CraftableItem) Bukkit.addRecipe(((CraftableItem) item).getCraftingRecipe(new NamespacedKey(this, item.getName())));
 		}
+
+		getServer().getPluginManager().registerEvents(new texturePackAutoAdd(), this);
 
 		super.onEnable();
 	}
