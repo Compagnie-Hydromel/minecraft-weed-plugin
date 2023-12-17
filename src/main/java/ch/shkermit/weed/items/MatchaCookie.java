@@ -23,8 +23,8 @@ import ch.shkermit.weed.utils.ItemUtils;
 
 public class MatchaCookie implements Listener, CommandExecutor, Item {
     private Marijuana marijuana = new Marijuana();
-    private String name = "matcha-cookie";
-    private String displayName = "§r§aMatcha Cookie";
+    private final String name = "matcha-cookie";
+    private final String displayName = "§r§aMatcha Cookie";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

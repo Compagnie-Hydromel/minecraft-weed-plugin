@@ -19,6 +19,8 @@ import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
 public class Marijuana implements Listener, CommandExecutor, Item {
+    private final String name = "marijuana";
+    private final String displayName = "§rMarijuana";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -47,12 +49,12 @@ public class Marijuana implements Listener, CommandExecutor, Item {
 
     @Override
     public String getName() {
-        return "marijuana";
+        return name;
     }
 
     @Override
     public String getDisplayName() {
-        return "§rMarijuana";
+        return displayName;
     }
 
     @Override
