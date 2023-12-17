@@ -23,7 +23,7 @@ import ch.shkermit.weed.utils.ItemUtils;
 
 public class MatchaCookie implements Listener, CommandExecutor, Item {
     private Marijuana marijuana = new Marijuana();
-    private final String name = "matcha-cookie";
+    private final String name = this.getClass().getSimpleName().toLowerCase();
     private final String displayName = "§r§aMatcha Cookie";
 
     @Override
@@ -36,14 +36,15 @@ public class MatchaCookie implements Listener, CommandExecutor, Item {
         ItemStack item = playerItemConsumeEvent.getItem();
         Player player = playerItemConsumeEvent.getPlayer();
 
-        if (item.isSimilar(getItemStack())) {
+        if (isSimilar(item)) {
             List<PotionEffect> effect = new ArrayList<PotionEffect>();
             int effectTime = 20 * 60 * 5;
 
             playerItemConsumeEvent.setCancelled(true);
             ItemUtils.eatItem(player, playerItemConsumeEvent.getHand(), item, 6, 1f);
 
-            effect.add(PotionEffectType.CONFUSION.createEffect(effectTime, 5));
+            effect.add(PotionEffectType.CONFUSION.createEffect(20 * 15, 5));
+            effect.add(PotionEffectType.WEAKNESS.createEffect(20 * 15, 5));
             effect.add(PotionEffectType.LEVITATION.createEffect(effectTime, 255));
             effect.add(PotionEffectType.SLOW_FALLING.createEffect(effectTime, 255));
 
@@ -59,6 +60,11 @@ public class MatchaCookie implements Listener, CommandExecutor, Item {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+    @Override
+    public boolean isSimilar(ItemStack itemStack) {
+        return ItemUtils.isSimilar(itemStack, getName());
     }
 
     @Override
@@ -83,6 +89,7 @@ public class MatchaCookie implements Listener, CommandExecutor, Item {
                 Material.COOKIE,
                 amount,
                 displayName,
+                name,
                 "§r§7A cookie with matcha 😉😉");
     }
 

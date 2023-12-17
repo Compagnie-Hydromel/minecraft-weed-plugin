@@ -9,7 +9,11 @@ commands:
     description: get marijuana item.
     usage: /marijuana <player>
     permission: weed.marijuana
-  matcha-cookie:
+  matchacookie:
     description: get matcha cookie item.
-    usage: /matcha-cookie <player>
-    permission: weed.matcha-cookie
+    usage: /matchacookie <player>
+    permission: weed.matchacookie
+  joint:
+    description: get joint item.
+    usage: /joint <player>
+    permission: weed.joint

@@ -19,7 +19,7 @@ import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
 public class Marijuana implements Listener, CommandExecutor, Item {
-    private final String name = "marijuana";
+    private final String name = this.getClass().getSimpleName().toLowerCase();
     private final String displayName = "§rMarijuana";
 
     @Override
@@ -41,7 +41,7 @@ public class Marijuana implements Listener, CommandExecutor, Item {
         ItemStack item = playerItemConsumeEvent.getItem();
         Player player = playerItemConsumeEvent.getPlayer();
 
-        if (item.isSimilar(getItemStack())) {
+        if (isSimilar(item)) {
             playerItemConsumeEvent.setCancelled(true);
             ItemUtils.eatItem(player, playerItemConsumeEvent.getHand(), item, 1, 0.5f);
         }
@@ -55,6 +55,11 @@ public class Marijuana implements Listener, CommandExecutor, Item {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+    @Override
+    public boolean isSimilar(ItemStack itemStack) {
+        return ItemUtils.isSimilar(itemStack, getName());
     }
 
     @Override
@@ -79,7 +84,8 @@ public class Marijuana implements Listener, CommandExecutor, Item {
         return ItemUtils.createItem(
             Material.CARROT, 
             amount, 
-            displayName, 
+            displayName,
+            name,
             "§r§7A plant that can be smoked", 
             "§r§7to get high.");
     }

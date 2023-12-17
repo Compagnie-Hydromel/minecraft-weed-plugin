@@ -11,6 +11,8 @@ public interface Item {
 
     public ShapedRecipe getCraftingRecipe(NamespacedKey namespacedKey);
 
+    public boolean isSimilar(ItemStack itemStack);
+
     public ItemStack getItemStack();
 
     public ItemStack getItemStack(int amount);

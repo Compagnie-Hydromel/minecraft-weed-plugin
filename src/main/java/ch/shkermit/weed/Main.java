@@ -12,11 +12,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ch.shkermit.weed.items.Item;
 import ch.shkermit.weed.items.Marijuana;
 import ch.shkermit.weed.items.MatchaCookie;
+import ch.shkermit.weed.items.Joint;
 
 public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie());
+		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie(), new Joint());
 		
 		for(Item item : items) {
 			getServer().getPluginManager().registerEvents((Listener) item, this);
