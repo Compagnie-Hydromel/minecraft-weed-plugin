@@ -58,7 +58,7 @@ public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
+        return ItemUtils.isSimilar(itemStack, getItemStack());
     }
 
     @Override
@@ -78,11 +78,11 @@ public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
     @Override
     public ItemStack getItemStack(int amount) {
         return ItemUtils.createItem(
-                Material.COOKIE,
-                amount,
-                displayName,
-                name,
-                "§r§7A cookie with matcha 😉😉");
+            13,
+            Material.COOKIE,
+            amount,
+            displayName,
+            "§r§7A cookie with matcha 😉😉");
     }
 
 }

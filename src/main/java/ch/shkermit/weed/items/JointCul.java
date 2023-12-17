@@ -54,7 +54,7 @@ public class JointCul implements Listener, CommandExecutor, Item {
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
+        return ItemUtils.isSimilar(itemStack, getItemStack());
     }
 
     @Override
@@ -65,10 +65,10 @@ public class JointCul implements Listener, CommandExecutor, Item {
     @Override
     public ItemStack getItemStack(int amount) {
         return ItemUtils.createItem(
+                12,
                 Material.STICK,
                 amount,
                 displayName,
-                name,
                 "§r§7You exaclty know what you gonna smoke bro",
                 "§r§7You fucking druggo");
     }

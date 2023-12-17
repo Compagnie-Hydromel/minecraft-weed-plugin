@@ -5,29 +5,23 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
-
-import ch.shkermit.weed.Main;
 
 public class ItemUtils {
 
-    public static ItemStack createItem(Material material, int amount, String displayName, String name, String... lore) {
+    public static ItemStack createItem(int itemCustomModelData, Material material, int amount, String displayName, String... lore) {
         ItemStack itemStack = new ItemStack(material, amount);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(displayName);
         List<String> loreList = Arrays.asList(lore);
         itemMeta.setLore(loreList);
-        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-        persistentDataContainer.set(new NamespacedKey(Main.getPlugin(Main.class), name), PersistentDataType.STRING, "weed_type: " + name);
+        itemMeta.setCustomModelData(itemCustomModelData);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
@@ -36,14 +30,14 @@ public class ItemUtils {
         if(item.getAmount() > 1) {
             item.setAmount(item.getAmount() - 1);
             eater.getInventory().setItem(equipmentSlot, item);
-        } else eater.getInventory().setItem(equipmentSlot, item);
+        } else eater.getInventory().setItem(equipmentSlot, null);
         eater.setFoodLevel(eater.getFoodLevel() + foodLevelToAdd);
         eater.setSaturation(eater.getSaturation() + saturationLevelToAdd);
     }
 
-    public static boolean containSpecifiedIdTag(ItemStack itemStack, String name) {
-        if (itemStack == null || itemStack.getItemMeta() == null) return false;
-        return itemStack.getItemMeta().getPersistentDataContainer().has(getNamespacedKey(name), PersistentDataType.STRING) && itemStack.getItemMeta().getPersistentDataContainer().get(getNamespacedKey(name), PersistentDataType.STRING).equals("weed_type: " + name);
+    public static boolean isSimilar(ItemStack itemStack, ItemStack itemExcepted) {
+        if (itemStack == null || itemStack.getItemMeta() == null || itemStack.getType() == null) return false;
+        return itemStack.getItemMeta().getCustomModelData() == itemExcepted.getItemMeta().getCustomModelData() && itemStack.getType() == itemExcepted.getType();
     }
 
     public static void smoke(World world, Location location) {
@@ -56,9 +50,5 @@ public class ItemUtils {
 
     public static List<PotionEffect> getEffects(PotionEffect... potionEffects) {
         return Arrays.asList(potionEffects);
-    }
-
-    private static NamespacedKey getNamespacedKey(String name) {
-        return new NamespacedKey(Main.getPlugin(Main.class), name);
     }
 }

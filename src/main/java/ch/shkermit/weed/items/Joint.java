@@ -77,7 +77,7 @@ public class Joint implements Listener, CommandExecutor, CraftableItem {
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
+        return ItemUtils.isSimilar(itemStack, getItemStack());
     }
 
     @Override
@@ -88,13 +88,13 @@ public class Joint implements Listener, CommandExecutor, CraftableItem {
     @Override
     public ItemStack getItemStack(int amount) {
         return ItemUtils.createItem(
-                Material.BLAZE_ROD,
-                amount,
-                displayName,
-                name,
-                "§r§7A rolled marijuana cigarette",
-                "§r§7to get high... Smoke it.",
-                "§r§7You will be good my men.");
+            11,
+            Material.BLAZE_ROD,
+            amount,
+            displayName,
+            "§r§7A rolled marijuana cigarette",
+            "§r§7to get high... Smoke it.",
+            "§r§7You will be good my men.");
     }
 
     private class setPlayerMoreHighAfterDelay implements Runnable {

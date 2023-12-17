@@ -1,5 +1,7 @@
 package ch.shkermit.weed.items;
 
+import java.util.Random;
+
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -31,7 +33,7 @@ public class Marijuana implements Listener, CommandExecutor, CraftableItem {
     public void onBlockBreak(BlockBreakEvent blockBreakEvent) {
         Block theBlock = blockBreakEvent.getBlock();
         
-        if (theBlock.getType() == Material.GRASS && Math.random() < 0.5) {
+        if (theBlock.getType() == Material.GRASS && new Random().nextInt(1000) < 10) {
             theBlock.getWorld().dropItem(theBlock.getLocation(), getItemStack());
         }
     }
@@ -59,7 +61,7 @@ public class Marijuana implements Listener, CommandExecutor, CraftableItem {
 
     @Override
     public boolean isSimilar(ItemStack itemStack) {
-        return ItemUtils.containSpecifiedIdTag(itemStack, getName());
+        return ItemUtils.isSimilar(itemStack, getItemStack());
     }
 
     @Override
@@ -78,10 +80,10 @@ public class Marijuana implements Listener, CommandExecutor, CraftableItem {
     @Override
     public ItemStack getItemStack(int amount) {
         return ItemUtils.createItem(
+            10,
             Material.CARROT, 
             amount, 
             displayName,
-            name,
             "§r§7A plant that can be smoked", 
             "§r§7to get high.");
     }
