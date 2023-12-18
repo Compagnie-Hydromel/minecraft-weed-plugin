@@ -36,7 +36,7 @@ public class ItemUtils {
     }
 
     public static boolean isSimilar(ItemStack itemStack, ItemStack itemExcepted) {
-        if (itemStack == null || itemStack.getItemMeta() == null || itemStack.getType() == null) return false;
+        if (itemStack == null || itemStack.getItemMeta() == null || itemStack.getType() == null || !itemStack.getItemMeta().hasCustomModelData() || !itemExcepted.getItemMeta().hasCustomModelData()) return false;
         return itemStack.getItemMeta().getCustomModelData() == itemExcepted.getItemMeta().getCustomModelData() && itemStack.getType() == itemExcepted.getType();
     }
 
