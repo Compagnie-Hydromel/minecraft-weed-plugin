@@ -39,6 +39,9 @@
     <resources>
       <resource>
         <directory>src/main/ressources</directory>
+        <excludes>
+          <exclude>weed-pack/</exclude>
+        </excludes>
       </resource>
     </resources>
 
