@@ -1,0 +1,17 @@
+<assembly>
+    <id>ressource-pack</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/ressources/weed-pack/</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                    <include>**/*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
