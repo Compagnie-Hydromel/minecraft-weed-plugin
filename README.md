@@ -6,13 +6,14 @@ Weed is a minecraft plugin that allows you to smoke weed in minecraft.
 
 ## 📌 Getting started
 ### 📜 Prerequisites
-- Java 11 or higher
+- Java 11
 - A locale minecraft server (1.20 or higher)
 - maven 3.6.3 or higher
 ### 📥 Building
 - Clone the repository
 - Run `mvn clean install`
 - The jar file will be in the target folder
+- the ressource pack will be in the target folder under 
 ### 📥 Installing
 - Put the jar file in the plugins folder of your server
 - Start the server or reload the plugins
