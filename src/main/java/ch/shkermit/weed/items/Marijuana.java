@@ -33,7 +33,7 @@ public class Marijuana implements Listener, CommandExecutor, CraftableItem {
     public void onBlockBreak(BlockBreakEvent blockBreakEvent) {
         Block theBlock = blockBreakEvent.getBlock();
         
-        if (theBlock.getType() == Material.GRASS && new Random().nextInt(1000) < 10) {
+        if (theBlock.getType() == Material.SHORT_GRASS && new Random().nextInt(1000) < 10) {
             theBlock.getWorld().dropItem(theBlock.getLocation(), getItemStack());
         }
     }
