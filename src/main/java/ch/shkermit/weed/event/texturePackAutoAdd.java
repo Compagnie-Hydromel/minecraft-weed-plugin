@@ -13,6 +13,6 @@ public class texturePackAutoAdd implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) throws UnsupportedEncodingException {
         Player player = event.getPlayer();
 
-        player.setResourcePack("https://github.com/Compagnie-Hydromel/minecraft-weed-plugin/releases/download/1.0.1/weed-pack-1.0.1.zip");
+        player.setResourcePack("https://github.com/Compagnie-Hydromel/minecraft-weed-plugin/releases/download/1.0.2/weed-pack-1.0.2.zip");
     }
 }
