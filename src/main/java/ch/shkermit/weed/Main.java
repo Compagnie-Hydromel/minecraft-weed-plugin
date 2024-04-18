@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ch.shkermit.weed.abilities.Glide;
 import ch.shkermit.weed.event.texturePackAutoAdd;
 import ch.shkermit.weed.items.Bong;
 import ch.shkermit.weed.items.CraftableItem;
@@ -21,7 +22,9 @@ import ch.shkermit.weed.items.Joint;
 public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie(), new Joint(), new JointCul(), new Bong());
+		Glide glide = new Glide();
+		List<? extends Item> items = Arrays.asList(new Marijuana(), new MatchaCookie(glide), new Joint(glide), new JointCul(), new Bong(glide));
+		List<Listener> listeners = Arrays.asList(glide, new texturePackAutoAdd());
 		
 		for(Item item : items) {
 			if(item instanceof Listener) getServer().getPluginManager().registerEvents((Listener) item, this);
@@ -29,7 +32,9 @@ public class Main extends JavaPlugin {
 			if(item instanceof CraftableItem) Bukkit.addRecipe(((CraftableItem) item).getCraftingRecipe(new NamespacedKey(this, item.getName())));
 		}
 
-		getServer().getPluginManager().registerEvents(new texturePackAutoAdd(), this);
+		for (Listener listener : listeners) {
+			getServer().getPluginManager().registerEvents(listener, this);
+		}
 
 		super.onEnable();
 	}

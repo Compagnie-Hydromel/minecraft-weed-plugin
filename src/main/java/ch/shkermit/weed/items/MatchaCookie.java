@@ -14,6 +14,7 @@ import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 
+import ch.shkermit.weed.abilities.Glide;
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
@@ -21,6 +22,11 @@ public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
     private Marijuana marijuana = new Marijuana();
     private final String name = this.getClass().getSimpleName().toLowerCase();
     private final String displayName = "§r§aMatcha Cookie";
+    private Glide glide;
+
+    public MatchaCookie(Glide glide) {
+        this.glide = glide;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -36,13 +42,12 @@ public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
             playerItemConsumeEvent.setCancelled(true);
             ItemUtils.eatItem(player, playerItemConsumeEvent.getHand(), item, 6, 1f);
             
-            int effectTime = 20 * 60 * 5;
+            int effectTimeInSeconds = 5 * 60;
 
             player.addPotionEffects(ItemUtils.getEffects(
                 PotionEffectType.CONFUSION.createEffect(20 * 15, 5),
-                PotionEffectType.LEVITATION.createEffect(effectTime, 255),
-                PotionEffectType.SLOW_FALLING.createEffect(effectTime, 255),
                 PotionEffectType.WEAKNESS.createEffect(20 * 15, 5)));
+            glide.addPlayer(player, effectTimeInSeconds);
         }
     }
 

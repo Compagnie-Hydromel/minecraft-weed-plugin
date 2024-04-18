@@ -19,15 +19,21 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffectType;
 
 import ch.shkermit.weed.Main;
+import ch.shkermit.weed.abilities.Glide;
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
 public class Joint implements Listener, CommandExecutor, CraftableItem {
+    private Glide glide;
     private Marijuana marijuana = new Marijuana();
     private JointCul joinCul = new JointCul();
     private final String name = this.getClass().getSimpleName().toLowerCase();;
     private final String displayName = "§rJoint";
     private List<Player> playersHigh = new ArrayList<Player>();
+
+    public Joint(Glide glide) {
+        this.glide = glide;
+    }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent playerInteractEvent) {
@@ -38,9 +44,9 @@ public class Joint implements Listener, CommandExecutor, CraftableItem {
         if(isSimilar(item) && playerInteractEvent.getAction().name().contains("RIGHT") && !playersHigh.contains(player)) {
             playerInteractEvent.setCancelled(true);
 
-            player.addPotionEffects(ItemUtils.getEffects(
-                    PotionEffectType.LEVITATION.createEffect(20 * 30, 255),
-                    PotionEffectType.SLOW_FALLING.createEffect(20 * 30, 255)));
+            int time = 30;
+
+            glide.addPlayer(player, time);
             
             ItemUtils.smoke(player.getWorld(), player.getLocation());
 

@@ -11,15 +11,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.potion.PotionEffectType;
 
+import ch.shkermit.weed.abilities.Glide;
 import ch.shkermit.weed.utils.CommandUtils;
 import ch.shkermit.weed.utils.ItemUtils;
 
 public class Bong implements Listener, CommandExecutor, CraftableItem {
+    private Glide glide;
     private Marijuana marijuana = new Marijuana();
     private final String name = this.getClass().getSimpleName().toLowerCase();;
     private final String displayName = "§rBong";
+
+    public Bong(Glide glide) {
+        this.glide = glide;
+    }
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -37,10 +43,7 @@ public class Bong implements Listener, CommandExecutor, CraftableItem {
             if(marijuana.isSimilar(player.getInventory().getItemInOffHand())) {
                 ItemStack itemInInventory = player.getInventory().getItemInOffHand();
                 itemInInventory.setAmount(itemInInventory.getAmount() - 1);
-                player.addPotionEffects(ItemUtils.getEffects(
-                    PotionEffectType.SLOW_FALLING.createEffect(20 * 45, 255),
-                    PotionEffectType.LEVITATION.createEffect(20 * 45, 255)
-                ));
+                glide.addPlayer(player, 45);
 
                 ItemUtils.smoke(player.getWorld(), player.getLocation());
 
