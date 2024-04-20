@@ -16,7 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -47,20 +46,9 @@ public class Glide implements Listener {
         String stringListOfPlayerUUID = dataContainer.getOrDefault(new NamespacedKey(Main.getPlugin(Main.class), "flying-player"), PersistentDataType.STRING, "");
         for(String playerUUID : stringListOfPlayerUUID.split(",")) {
             try {
-                UUID.fromString(playerUUID);
+                players.add(UUID.fromString(playerUUID));
             } catch (IllegalArgumentException e) {
                 continue;
-            }
-        }
-    }
-
-    @EventHandler
-    private void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
-        Player joiningPlayer = playerJoinEvent.getPlayer();
-        for(UUID flyingPlayer : players) {
-            if (flyingPlayer.equals(joiningPlayer.getUniqueId())) {
-                players.remove(flyingPlayer);
-                addPlayer(flyingPlayer);
             }
         }
     }
