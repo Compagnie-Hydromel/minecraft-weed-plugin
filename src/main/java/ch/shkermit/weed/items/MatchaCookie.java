@@ -45,7 +45,7 @@ public class MatchaCookie implements Listener, CommandExecutor, CraftableItem {
             int effectTimeInSeconds = 5 * 60;
 
             player.addPotionEffects(ItemUtils.getEffects(
-                PotionEffectType.CONFUSION.createEffect(20 * 15, 5),
+                PotionEffectType.NAUSEA.createEffect(20 * 15, 5),
                 PotionEffectType.WEAKNESS.createEffect(20 * 15, 5)));
             glide.addPlayer(player, effectTimeInSeconds);
         }

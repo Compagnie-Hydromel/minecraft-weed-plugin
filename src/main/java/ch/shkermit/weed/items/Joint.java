@@ -114,7 +114,7 @@ public class Joint implements Listener, CommandExecutor, CraftableItem {
         public void run() {
             player.addPotionEffects(ItemUtils.getEffects(
                 PotionEffectType.SLOW_FALLING.createEffect(20 * 15, 255),
-                PotionEffectType.CONFUSION.createEffect(20 * 15, 255)));
+                PotionEffectType.NAUSEA.createEffect(20 * 15, 255)));
 
             ItemUtils.smoke(player.getWorld(), player.getLocation());
 

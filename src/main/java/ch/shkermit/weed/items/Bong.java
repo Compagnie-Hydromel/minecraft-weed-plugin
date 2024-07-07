@@ -88,9 +88,8 @@ public class Bong implements Listener, CommandExecutor, CraftableItem {
     @Override
     public ShapedRecipe getCraftingRecipe(NamespacedKey namespacedKey) {
         return new ShapedRecipe(namespacedKey, getItemStack())
-            .shape("Gaa", "aGG", "aGA")
+            .shape("G  ", " GG", " GA")
             .setIngredient('G', Material.GLASS)
-            .setIngredient('A', Material.AMETHYST_SHARD)
-            .setIngredient('a', Material.AIR);
+            .setIngredient('A', Material.AMETHYST_SHARD);
     }
 }
