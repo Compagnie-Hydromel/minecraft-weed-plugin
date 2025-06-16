@@ -37,7 +37,13 @@ public class Glide implements Listener {
         for (String pair : pairs) {
             String[] keyValue = pair.split("=");
             if (keyValue.length == 2) {
-                UUID key = UUID.fromString(keyValue[0]);
+                UUID key;
+                try {
+                    String uuidString = keyValue[0].split("-")[3] + "-" + keyValue[0].split("-")[4];
+                    key = UUID.fromString(uuidString);
+                } catch (Exception e) {
+                    continue;
+                }
                 LocalDateTime value = LocalDateTime.parse(keyValue[1]);
                 playerTimeToStopEffect.put(key, value);
             }
